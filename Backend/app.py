@@ -75,6 +75,9 @@ for _, row in df.iterrows():
     ))
 
 conn.commit()
+cur.execute("""
+        SELECT * FROM customers LIMIT 10 
+    """)
 cur.close()
 conn.close()
 

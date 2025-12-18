@@ -9,3 +9,4 @@ datasources:
     secureJsonData:
       password: postgres
     isDefault: true
+    sslmode: disable
