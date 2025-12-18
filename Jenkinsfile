@@ -9,10 +9,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/sallmayasser/3-Tier-Application-with-Jenkins.git'
+                git branch: 'main',
+                    url: 'https://github.com/sallmayasser/3-Tier-Application-with-Jenkins.git'
             }
         }
-
         stage('Build Images') {
             steps {
                 sh 'docker-compose build'
