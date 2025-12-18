@@ -139,4 +139,10 @@ pass: admin
 
 Create a dashboard using PostgreSQL datasource.
 
+- Datasource:
+
+![alt text](images/datasource.png)
+
+- Dashboard:
+
 ![alt text](images/dashboard.png)
