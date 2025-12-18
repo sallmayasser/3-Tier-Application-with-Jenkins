@@ -34,7 +34,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/
+      - ./Grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
     networks:
       - app-net
     depends_on:
