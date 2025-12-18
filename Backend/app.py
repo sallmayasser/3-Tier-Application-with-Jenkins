@@ -1,14 +1,25 @@
 import os
 import pandas as pd
 import psycopg2
+import time
 
 # DB connection using Jenkins credentials
-conn = psycopg2.connect(
-    host=os.getenv("DB_HOST", "db"),
-    database=os.getenv("DB_NAME", "customers"),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASSWORD")
-)
+
+for i in range(10):
+    try:
+        conn = psycopg2.connect(
+            host=os.getenv("DB_HOST", "db"),
+            database=os.getenv("DB_NAME", "customers"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD")
+        )
+        break
+    except psycopg2.OperationalError:
+        print("DB not ready, retrying...")
+        time.sleep(10)
+else:
+    raise Exception("Database not available")
+
 
 # Load CSV
 df = pd.read_csv("customers.csv")
