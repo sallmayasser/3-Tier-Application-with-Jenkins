@@ -1,3 +1,9 @@
+-- Create database
+CREATE DATABASE shop;
+-- Connect to it
+\c shop;
+
+-- Create table
 CREATE TABLE customers (
     idx INT,
     customer_id INT,
