@@ -58,6 +58,22 @@ Get initail admin password
 docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
+install docker compose command in container
+
+```bash
+docker exec -it --user root jenkins bash
+apt-get update
+apt-get install -y curl jq
+
+DOCKER_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)
+curl -SL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+
+```
+
 Open Jenkins → http://VM_IP:8080
 
 ---
@@ -80,13 +96,20 @@ Secret: postgres
 
 ✅ These IDs are important — we’ll use them in the Jenkinsfile.
 
+![alt text](images/Credentials.png)
+
 ---
 
 ## Create Pipeline
 
 1. Create Pipeline Job
 2. Point to repo containing Jenkinsfile
+
+   ![alt text](images/pipeline.png)
+
 3. Build 🚀
+
+![alt text](images/build.png)
 
 ---
 
@@ -104,6 +127,8 @@ docker ps
 docker logs backend
 ```
 
+![alt text](images/verify.png)
+
 - Grafana
 
 ```bash
@@ -113,3 +138,5 @@ pass: admin
 ```
 
 Create a dashboard using PostgreSQL datasource.
+
+![alt text](images/dashboard.png)
